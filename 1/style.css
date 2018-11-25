@@ -1,0 +1,42 @@
+body {
+    margin: 0;
+    font-family: Arial, serif;
+}
+
+.main_form {
+    box-sizing: border-box;
+    width: 400px;
+    height: 220px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    background-color: #0094FF;
+    border: solid 2px #218BFF;
+    color: white;
+}
+
+p {
+    margin: 0;
+    margin-left: 15px;
+}
+
+input {
+    width: 360px;
+    margin-left: 15px;
+    margin-bottom: 15px;
+    padding: 2px;
+    border: solid 1px #617888;
+    outline: none;
+}
+
+button {
+    height: 30px;
+    margin-left: 15px;
+    background-color: #F0E68C;
+    border: 0;
+    color: black;
+    cursor: pointer;
+}
