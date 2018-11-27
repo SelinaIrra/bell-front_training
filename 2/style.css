@@ -1,0 +1,45 @@
+body {
+    margin: 0;
+    font-family: Arial, serif;
+}
+
+.main_form {
+    box-sizing: border-box;
+    width: 400px;
+    height: 185px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    background-color: #B5FFB9;
+    box-shadow: 2px 3px 10px #bfbfbf, 2px 3px 10px #c7c7c7;
+}
+
+p {
+    margin: 0;
+    margin-left: 10px;
+}
+
+input {
+    box-sizing: border-box;
+    width: 380px;
+    margin: 5px 10px 5px 10px;
+    padding: 2px;
+    border: solid 1px #617888;
+    outline: none;
+}
+
+button {
+    margin-left: 10px;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+img {
+    width: 6px;
+    height: 16px;
+    float: right;
+    margin-right: 10px;
+}
