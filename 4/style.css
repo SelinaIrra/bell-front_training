@@ -1,0 +1,64 @@
+html {
+    height: 100%;
+    font-family: Arial, serif;
+    min-width: 400px;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+    background-color: #c7c7c7;
+    position: relative;
+}
+
+.actions, .name_of_page{
+    position: relative;
+    width: 400px;
+    top: 50px;
+    text-align: center;
+    left: calc(50% - 400px/2);
+}
+
+img {
+    cursor: pointer;
+    margin: 20px;
+}
+
+.lock_block {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.block {
+    top: 30%;
+    box-sizing: border-box;
+    width: 100%;
+    background-color: #242424;
+    padding: 20px;
+    position: absolute;
+    text-align: center;
+}
+
+.close {
+    background-color: transparent;
+    color: white;
+    font-weight: bold;
+    float: right;
+    border: 0;
+    outline: none;
+    cursor: pointer;
+}
+
+.repeat {
+    background-color: transparent;
+    background-image: url("image/repeat.png");
+    margin-top: 10px;
+    width: 70px;
+    height: 68px;
+    border: 0;
+    outline: none;
+    cursor: pointer;
+}
