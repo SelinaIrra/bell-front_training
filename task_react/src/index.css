@@ -27,7 +27,7 @@ body {
   border: 1px solid grey;
 }
 
-.mainBlock table{
+.mainBlock table {
   margin: 5px 0 5px 0;
   width: 550px;
   text-align: center;
@@ -94,24 +94,7 @@ thead {
   cursor: pointer;
 }
 
-.crossingButton {
-  text-decoration: none;
-  height: 16px;
-  border: 1px solid grey;
-  padding: 0 5px 0 5px;
-  color: grey;
-}
-
-.crossingButton:active {
-  color: grey;
-}
-
-.crossingButton:visited {
-  color: grey;
-}
-
-.deleteCartButton {
-  float: right;
+.commonButton {
   background-color: transparent;
   font-size: 12pt;
   padding: 0 5px 0 5px;
@@ -120,6 +103,10 @@ thead {
   color: grey;
   outline: none;
   cursor: pointer;
+}
+
+.rightButton {
+  float: right;
 }
 
 .deleteButton {
@@ -140,7 +127,7 @@ thead {
   cursor: pointer;
 }
 
-.infSum{
+.infSum {
   margin-bottom: 0;
 }
 
@@ -152,6 +139,6 @@ thead {
   border: 1px solid grey;
 }
 
-.hiddenEl{
+.hiddenEl {
   display: none;
 }
