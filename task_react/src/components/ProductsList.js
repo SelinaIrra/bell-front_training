@@ -44,40 +44,32 @@ class ProductsList extends React.Component {
     }
 
     renderMainBlock = (filteredItems) => {
-        let mainBlock, tbody;
-        if (filteredItems.length === 0) {
-            mainBlock = <p>Товар не найден</p>
-        }
-        else {
-            tbody = filteredItems.map((item) => {
-                let cartItem = this.state.cart.find((cartItem) => cartItem.id === item.id) || 0;
-                return (
-                    <tr key={item.id}>
-                        <td> {item.name} </td>
-                        <td> ${item.price} </td>
-                        <td> {(cartItem) ? cartItem.number : 0} </td>
-                        <td>
-                            <button className="addButton" title="Добавить" id={item.id} data-action="add"></button>
-                        </td>
-                    </tr>
-                );
-            });
-            mainBlock =
-                <div className="mainBlock" >
-                    <table onClick={(e) => this.addItemToCart(e)}>
-                        <thead>
-                        <tr>
-                            <td> Название</td>
-                            <td> Цена</td>
-                            <td> Количество</td>
-                            <td></td>
+        return <div className="mainBlock">
+            <table onClick={(e) => this.addItemToCart(e)}>
+                <thead>
+                <tr>
+                    <td> Название</td>
+                    <td> Цена</td>
+                    <td> Количество</td>
+                    <td></td>
+                </tr>
+                </thead>
+                <tbody>{filteredItems.map((item) => {
+                    let cartItem = this.state.cart.find((cartItem) => cartItem.id === item.id) || 0;
+                    return (
+                        <tr key={item.id}>
+                            <td>{item.name} </td>
+                            <td>${item.price} </td>
+                            <td>{(cartItem) ? cartItem.number : 0} </td>
+                            <td>
+                                <button className="addButton" title="Добавить" id={item.id}
+                                        data-action="add"></button>
+                            </td>
                         </tr>
-                        </thead>
-                        <tbody>{tbody}</tbody>
-                    </table>
-                </div>;
-        }
-        return mainBlock
+                    );
+                })}</tbody>
+            </table>
+        </div>;
     };
 
     render() {
@@ -95,9 +87,12 @@ class ProductsList extends React.Component {
                            value={this.state.searchValue} onChange={(e) => this.setSearchValue(e)}
                            placeholder="введите часть названия товара" type="search"/>
                 </div>
-                {this.renderMainBlock(filteredItems)}
+                {filteredItems.length === 0 ? <p>Товар не найден</p> : this.renderMainBlock(filteredItems)}
                 <button className="commonButton"
-                        onClick={() => { this.props.updateData(this.state.cart, showCart)}}> Корзина </button>
+                        onClick={() => {
+                            this.props.updateData(this.state.cart, showCart)
+                        }}> Корзина
+                </button>
             </div>
         );
     }

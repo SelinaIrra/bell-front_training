@@ -1,5 +1,6 @@
 import React from "react";
 import App from "./App";
+import {isEmpty} from "lodash";
 
 class Cart extends React.Component {
     constructor(props) {
@@ -32,70 +33,59 @@ class Cart extends React.Component {
         this.setState({cart: []});
     };
 
-    renderMainBlock = (sum) => {
-        let mainBlock;
-        let deleteCartButtonClass;
-        if (sum !== 0) {
-            deleteCartButtonClass = "commonButton rightButton";
-            mainBlock =
-                <div className="mainBlock">
-                    <table onClick={(e) => this.deleteItemFromCart(e)}>
-                        <thead>
-                        <tr>
-                            <td> Название</td>
-                            <td> Количество</td>
-                            <td> Стоимость</td>
-                            <td colSpan='2'></td>
+    renderMainBlock = () => {
+        return <div className="mainBlock">
+            <table onClick={(e) => this.deleteItemFromCart(e)}>
+                <thead>
+                <tr>
+                    <td> Название</td>
+                    <td> Количество</td>
+                    <td> Стоимость</td>
+                    <td colSpan='2'></td>
+                </tr>
+                </thead>
+                <tbody>
+                {this.state.cart.map((cartItem) => {
+                    let item = App.items.find((item) => cartItem.id === item.id);
+                    return (
+                        <tr key={cartItem.id}>
+                            <td>{item.name}</td>
+                            <td>{cartItem.number}</td>
+                            <td>${cartItem.number * item.price} </td>
+                            <td>
+                                <button id={cartItem.id} data-action="delete"
+                                        className="deleteButton" title="удалить"></button>
+                            </td>
+                            <td>
+                                <button id={cartItem.id} data-action="deleteAll"
+                                        className="deleteAllButton" title="удалить все"></button>
+                            </td>
                         </tr>
-                        </thead>
-                        <tbody>
-                        {this.state.cart.map((cartItem) => {
-                            let item = App.items.find((item) => cartItem.id === item.id);
-                            return (
-                                <tr key={cartItem.id}>
-                                    <td>{item.name}</td>
-                                    <td>{cartItem.number}</td>
-                                    <td>${cartItem.number * item.price} </td>
-                                    <td>
-                                        <button id={cartItem.id} data-action="delete"
-                                                className="deleteButton" title="удалить"></button>
-                                    </td>
-                                    <td>
-                                        <button id={cartItem.id} data-action="deleteAll"
-                                                className="deleteAllButton" title="удалить все"></button>
-                                    </td>
-                                </tr>
-                            )
-                        })}
-                        </tbody>
-                    </table>
-                    <p className="infSum"> Всего ${sum}</p>
-                </div>;
-        }
-        else
-        {
-            deleteCartButtonClass =  "hiddenEl";
-            mainBlock =
-                <div className="emptyCart">
-                    <p>Корзина пуста</p>
-                </div>;
-        }
-        return [mainBlock, deleteCartButtonClass]
+                    )
+                })}
+                </tbody>
+            </table>
+            <p className="infSum"> Всего ${this.state.cart.reduce(function (sum, cartItem) {
+                let item = App.items.find((item) => cartItem.id === item.id);
+                return sum + cartItem.number * item.price;
+            }, 0)}</p>
+        </div>;
     };
 
     render() {
+        let isEmptyCart = isEmpty(this.state.cart);
         let showCart = false;
-        let sum = this.state.cart.reduce(function (sum, cartItem) {
-            let item = App.items.find((item) => cartItem.id === item.id);
-            return sum + cartItem.number * item.price;
-        }, 0);
         return (
             <div>
-                {this.renderMainBlock(sum)[0]}
+                {isEmptyCart ? <p> Корзина пуста</p> : this.renderMainBlock()}
                 <button className="commonButton"
-                        onClick={() => { this.props.updateData(this.state.cart, showCart)}}> Продукты </button>
-                <button className={this.renderMainBlock(sum)[1]}
-                        onClick={() => this.deleteCart()}> Очистить корзину</button>
+                        onClick={() => {
+                            this.props.updateData(this.state.cart, showCart)
+                        }}> Продукты
+                </button>
+                <button className={isEmptyCart ? 'hiddenEl' : 'commonButton rightButton'}
+                        onClick={() => this.deleteCart()}> Очистить корзину
+                </button>
             </div>
         )
     }
