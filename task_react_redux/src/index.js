@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import {combineReducers, createStore} from 'redux';
-import { Provider } from "react-redux";
+import {Provider} from "react-redux";
 import cartReducer from "./reducers/cart";
 import productsReducer from "./reducers/filteredProducts";
 import Cart from "./Cart";
@@ -11,13 +11,14 @@ import {Route} from "react-router";
 import Switch from "react-router/es/Switch";
 import BrowserRouter from "react-router-dom/es/BrowserRouter";
 import {routerReducer} from "react-router-redux";
+import {composeWithDevTools} from 'redux-devtools-extension'
 
 const rootReducer = combineReducers({
     cart: cartReducer,
     filteredProducts: productsReducer,
     routing: routerReducer
 });
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, composeWithDevTools());
 
 
 ReactDOM.render(

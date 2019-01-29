@@ -1,4 +1,4 @@
-export default function get_items() {
+export default function getItems() {
     return items;
 }
 const items = [

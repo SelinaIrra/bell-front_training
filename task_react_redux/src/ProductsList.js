@@ -3,26 +3,31 @@ import connect from "react-redux/es/connect/connect";
 import {addProduct} from "./actions/CartActions";
 import {filterProducts} from "./actions/FilterActions";
 import { Link } from 'react-router-dom'
-import get_items from './data.js'
+import getItems from './data.js'
 import bindActionCreators from "redux/src/bindActionCreators";
 
 class ProductsList extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {queryStr: ''};
+    }
+
     onAddBtnClick(e) {
         if (e.target.getAttribute('data-action') === 'add')
             this.props.addProduct(Number(e.target.getAttribute('id')))
     }
+
     onFilterBtnClick() {
-        this.props.filterProducts(document.getElementById('searchInput').value)
+        this.props.filterProducts(this.state.queryStr)
     }
 
     updateFilteredInput(e) {
-        if (e.target.value === '')
-            this.props.filterProducts('')
+        this.setState({queryStr: e.target.value});
     }
 
     renderMainBlock = (productsList) => {
         return <div className="mainBlock">
-            <table onClick={this.onAddBtnClick.bind(this)}>
+            <table onClick={(e)=>this.onAddBtnClick(e)}>
                 <thead>
                 <tr>
                     <td> Название</td>
@@ -52,16 +57,16 @@ class ProductsList extends React.Component {
     render() {
         let productsList;
         if (this.props.filteredId === null)
-            productsList = get_items();
+            productsList = getItems();
         else
-            productsList = this.props.filteredId.map((x) => get_items()[x]);
+            productsList = this.props.filteredId.map((x) => getItems()[x]);
         return (
             <div className="content">
                 <div className="search">
-                    <button className="searchButton" onClick={this.onFilterBtnClick.bind(this)}></button>
+                    <button className="searchButton" onClick={(e)=>this.onFilterBtnClick(e)}></button>
                     <input className="searchInput" id="searchInput"
                            defaultValue={this.props.query}
-                           onChange={this.updateFilteredInput.bind(this)}
+                           onChange={(e)=>this.updateFilteredInput(e)}
                            placeholder="введите часть названия товара"
                            type="search"/>
                 </div>

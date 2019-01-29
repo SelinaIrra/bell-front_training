@@ -1,4 +1,4 @@
-import get_items from '../data.js'
+import getItems from '../data.js'
 
 const initialState = {
     query: '',
@@ -10,7 +10,7 @@ export default function filteredProducts (state = initialState, action) {
         case 'FILTER_PRODUCTS':
             let reg = new RegExp(action.payload, 'i');
             return { ...state, query: action.payload,
-                filteredId: get_items().filter(x => reg.test(x.name)).map(x => x.id - 1)};
+                filteredId: getItems().filter(x => reg.test(x.name)).map(x => x.id - 1)};
         default:
             return state;
     }
